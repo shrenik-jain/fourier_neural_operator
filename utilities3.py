@@ -156,23 +156,34 @@ class RangeNormalizer(object):
         x = x.view(s)
         return x
 
-#loss function with rel/abs Lp loss
+# loss function with rel/abs Lp loss
 class LpLoss(object):
+    """
+    Compute Lp loss for a batch of input data and is defined as: 
+        Lp = E[|x - y|^p]^(1/p)
+
+    where 
+    x and y: predicted and target data, respectively.
+    p: order of the norm (p=1,2,3,...)
+    """
     def __init__(self, d=2, p=2, size_average=True, reduction=True):
         super(LpLoss, self).__init__()
 
         #Dimension and Lp-norm type are postive
         assert d > 0 and p > 0
 
-        self.d = d
-        self.p = p
-        self.reduction = reduction
-        self.size_average = size_average
+        self.d = d # dimension
+        self.p = p # order of the norm
+        self.reduction = reduction # if True, returns scalar loss. If False, returns a vector of losses
+        self.size_average = size_average # if True, returns the mean loss. If False, returns the sum of losses
 
     def abs(self, x, y):
+        """ 
+        absolute Lp loss
+        """
         num_examples = x.size()[0]
 
-        #Assume uniform mesh
+        # Assume uniform mesh
         h = 1.0 / (x.size()[1] - 1.0)
 
         all_norms = (h**(self.d/self.p))*torch.norm(x.view(num_examples,-1) - y.view(num_examples,-1), self.p, 1)
@@ -186,6 +197,9 @@ class LpLoss(object):
         return all_norms
 
     def rel(self, x, y):
+        """
+        relative Lp loss
+        """
         num_examples = x.size()[0]
 
         diff_norms = torch.norm(x.reshape(num_examples,-1) - y.reshape(num_examples,-1), self.p, 1)

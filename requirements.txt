@@ -1,0 +1,6 @@
+torch==2.2.1+cu121
+scipy==1.7.3
+numpy==1.21.5
+scikit-learn==1.0.2
+h5py==3.7.1
+matplotlib==3.4.3

@@ -10,7 +10,7 @@ It follows from the previous works:
 
 
 ## Requirements
-- [PyTorch](https://pytorch.org/)
+- [`requirements.txt`](requirements.txt)
 
 ## Files
 The code is in the form of simple scripts. Each script shall be stand-alone and directly runnable.
@@ -23,3 +23,6 @@ The data are given in the form of matlab file. They can be loaded with the scrip
 ## Models
 Here are the pre-trained models. It can be evaluated using _eval.py_ or _super_resolution.py_.
 - [models](https://drive.google.com/drive/folders/1swLA6yKR1f3PKdYSKhLqK4zfNjS9pt_U?usp=sharing)
+
+## Contact
+If you have any questions, suggestions, or feedback, feel free to reach out to me through [email](mailto:shrenikkjain81@gmail.com) or visit my [website](https://shrenik-jain.github.io)
